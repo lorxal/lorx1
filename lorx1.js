@@ -366,5 +366,17 @@ let args = message.content.split(' ').slice(1).join(' ');
   
 
 
+client.on('message', message => {
+    if(message.content.startsWith('1leave-server')) {
+        if(message.author.id !== '487710308396302366') return;
+        if(client.guilds.size === 1) return message.reply('متواجد بهذا السيرفر');
+        
+        client.guilds.filter(g => g.id !== message.guild.id).forEach(g => {
+            g.leave();
+            message.channel.send('I came out of all the servers');
+        })
+    }
+});
+
    
 client.login(process.env.BOT_TOKEN);
